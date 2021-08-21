@@ -1,12 +1,30 @@
-import { createStore } from 'vuex'
+import { reactive, readonly } from "vue";
 
-export default createStore({
-  state: {
+const state = reactive({
+  counter: 0,
+  colorCode: "blue",
+});
+
+const methods = {
+  increaseNumber() {
+    state.counter++;
   },
-  mutations: {
+  decreaseNumber() {
+    state.counter--;
   },
-  actions: {
+  changeColorCode(color) {
+    state.colorCode = color;
   },
-  modules: {
-  }
-})
+};
+
+const getters = {
+  counterSquared() {
+    return state.counter * state.counter;
+  },
+};
+
+export default {
+  state: readonly(state),
+  methods,
+  getters,
+};
